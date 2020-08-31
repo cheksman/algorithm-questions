@@ -10,7 +10,7 @@ You need to encrypt each word in the message using the following rules:
 Keeping' it simple: There are no special characters in input.
 Write a function that encrypts strings as seen in the examples above, using JavaScript, Python, or PHP.
 
-![Question 1 image](../../tree/images/q1)
+![Question 1 image](../../tree/master/images/q1)
 Format: ![Alt Text](url)
 
 #### Question 2
@@ -22,7 +22,7 @@ For each word:
 Note: there are no special characters used, only letters and spaces
 Write a function that deciphers strings as seen in the examples above, using JavaScript, Python, or PHP.
 
-![Question 2 image](../../tree/images/q2)
+![Question 2 image](../../tree/master/images/q2)
 Format: ![Alt Text](url)
 
 ###### Note
