@@ -12,42 +12,49 @@ STEPS FOR ENCRYPT
 
 
 function encryptThis(string) {
-  if (typeof string == 'string') {          // check if value is string
-    let fullWords = [];
-    let finalWord;
-    let final = ""                       
+  if (typeof string == 'string') {
+    let finalWord = "" 
+    let finalArray = []
+    let finalSentence = ""                  
     const words = string.split(" ")
     words.forEach(function (word, i) {
-
-      if (word.length < 2) {                                   // if word length is less than 2 
-        return final = word.charCodeAt(0)                            // return ascii of only character
+      function encodeChar (encode) {
+        return encode.charCodeAt(0)
+      }
+      function arrangeWord(passedString) {
+        let secondWord = "";
+        const newChars = passedString.split("")
+        let n = newChars.length - 1
+        let firstChar = newChars[0];
+        let lastChar = newChars[n];
+        for (let index = 0; index < newChars.length; index++) {
+          if (index === n) {
+            newChars.splice(0, 1, lastChar);
+            newChars.splice(n, 1, firstChar);
+            return secondWord = newChars.join("")
+          }
+        }
+        return secondWord
+      }
+      if (word.length < 2) {                            
+        return finalWord = encodeChar(word)                 
       }
       if (word.length === 2) {
         let newWordArray = []
         const newWord = word.split("")
-        const asciiChar = newWord[0].charCodeAt(0)
+        const asciiChar = encodeChar(newWord[0])
         newWordArray = [asciiChar, newWord[1]];
-        return final = newWordArray.join("")
+        finalWord = newWordArray.join("")
+        finalArray.push(finalWord)
+        return
       }
-      
-      const newChars = word.split("")
-      let firstChar = newChars[0].charCodeAt(0);
-      let secondChar = newChars[1];
-      for (let index = 0; index < newChars.length; index++) {
-        let n = newChars.length - 1
-        if (index === n) {
-          newChars.splice(0, 1, firstChar);
-          newChars.splice(1, 1, newChars[n]);
-          newChars.pop();
-          newChars.push(secondChar)
-          finalWord = newChars.join("")                               // join all characters 
-          fullWords.push(finalWord)
-          final = fullWords.join(" ")                                 // join all words
-          return final
-        }
-      }
+      let firstLetter = word.slice(0, 1);
+      let secLetter = word.slice(1)
+      finalWord = [encodeChar(firstLetter), arrangeWord(secLetter)].join("")
+      finalArray.push(finalWord)
+      finalSentence = finalArray.join(" ")
     })
-    return final
+    return finalSentence
   } else {
     return 'not a string'
   }
@@ -67,7 +74,6 @@ function decryptThis(string) {
     let final = ""   
     let allWords = ""            
     const words = string.split(" ")
-
     function arrangeWord(passedString) {
       let secondWord = "";
       const newChars = passedString.split("")
@@ -83,13 +89,10 @@ function decryptThis(string) {
       }
       return secondWord
     }
-
     function decodeChar (decode) {
       return String.fromCharCode(decode)
     }
-
-    words.forEach(function (word, i) {
-      
+    words.forEach(function (word, i) {     
       if (i === 0) {
         const newWord = word.slice(0, 2);
         const secWord = word.slice(2);
@@ -103,13 +106,10 @@ function decryptThis(string) {
         fullWords = [decodeChar(newWord), arrangeWord(secWord)]
         final = fullWords.join("")
         return
-
       } 
-
       let decodeWord = word.slice(0, 3);
       let otherSec = word.slice(3)
       joinedChars = [decodeChar(decodeWord), arrangeWord(otherSec)]
-
       allWords = joinedChars.join("")
     })
     finalWord = [final, allWords]
