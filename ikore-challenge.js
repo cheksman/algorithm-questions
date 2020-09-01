@@ -10,6 +10,28 @@ STEPS FOR ENCRYPT
 
 */
 
+function encodeChar (encode) {
+  return encode.charCodeAt(0)
+}
+function decodeChar (decode) {
+  return String.fromCharCode(decode)
+}
+function arrangeWord(passedString) {
+  let secondWord = "";
+  const newChars = passedString.split("")
+  let n = newChars.length - 1
+  let firstChar = newChars[0];
+  let lastChar = newChars[n];
+  for (let index = 0; index < newChars.length; index++) {
+    if (index === n) {
+      newChars.splice(0, 1, lastChar);
+      newChars.splice(n, 1, firstChar);
+      return secondWord = newChars.join("")
+    }
+  }
+  return secondWord
+}
+
 
 function encryptThis(string) {
   if (typeof string == 'string') {
@@ -18,26 +40,10 @@ function encryptThis(string) {
     let finalSentence = ""                  
     const words = string.split(" ")
     words.forEach(function (word, i) {
-      function encodeChar (encode) {
-        return encode.charCodeAt(0)
-      }
-      function arrangeWord(passedString) {
-        let secondWord = "";
-        const newChars = passedString.split("")
-        let n = newChars.length - 1
-        let firstChar = newChars[0];
-        let lastChar = newChars[n];
-        for (let index = 0; index < newChars.length; index++) {
-          if (index === n) {
-            newChars.splice(0, 1, lastChar);
-            newChars.splice(n, 1, firstChar);
-            return secondWord = newChars.join("")
-          }
-        }
-        return secondWord
-      }
       if (word.length < 2) {                            
-        return finalWord = encodeChar(word)                 
+        finalWord = encodeChar(word)
+        finalArray.push(finalWord)
+        return                
       }
       if (word.length === 2) {
         let newWordArray = []
@@ -74,24 +80,6 @@ function decryptThis(string) {
     let final = ""   
     let allWords = ""            
     const words = string.split(" ")
-    function arrangeWord(passedString) {
-      let secondWord = "";
-      const newChars = passedString.split("")
-      let n = newChars.length - 1
-      let firstChar = newChars[0];
-      let lastChar = newChars[n];
-      for (let index = 0; index < newChars.length; index++) {
-        if (index === n) {
-          newChars.splice(0, 1, lastChar);
-          newChars.splice(n, 1, firstChar);
-          return secondWord = newChars.join("")
-        }
-      }
-      return secondWord
-    }
-    function decodeChar (decode) {
-      return String.fromCharCode(decode)
-    }
     words.forEach(function (word, i) {     
       if (i === 0) {
         const newWord = word.slice(0, 2);
